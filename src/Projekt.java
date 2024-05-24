@@ -102,6 +102,10 @@ public class Projekt {
         }
         return dividers==2;
     }
+    /***
+    *converts matrixes into an ArrayList
+    *Made by: Nagy Richárd
+    */
     public static ArrayList<Integer> matrixToList(int[][] matrix){
         var list = new ArrayList<Integer>();
 
