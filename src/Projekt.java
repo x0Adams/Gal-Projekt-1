@@ -11,12 +11,13 @@ public class Projekt {
     }
 
     /***
-     * finds and prints all prime number under the main diagonal
+     * finds and prints all prime number in the matrix
      * prints the sum of all number under the main diagonal
      * Made by: Nagy Richárd
      */
     public static void task1(int[][] matrix) {
         var diagonal = new ArrayList<Integer>();
+        var matrixList = matrixToList(matrix);
         int[] arr;
         for (int x = 1; x < matrix.length; x++) {
             arr = getDiagonal(matrix, x, 0, 'r');
@@ -25,7 +26,7 @@ public class Projekt {
             }
         }
         System.out.print("a:\n\t\t");
-        diagonal.stream().filter(num -> isPrime(num)).forEach(num -> System.out.print(num+" "));
+        matrixList.stream().filter( num -> isPrime(num)).forEach(num -> System.out.print(num+" "));
         System.out.println("\n\tb:\n\t\t"+"sum: "+diagonal.stream().reduce(0, Integer::sum));
     }
 
@@ -37,7 +38,6 @@ public class Projekt {
      * @param y top y index of the diagonal
      * @param direction can be r (right) or l (left), it is the direction of the diagonal form the top to the bottom
      * @return an array of the elements of the diagonal
-     * Made by: Nagy Richárd
      */
     public static int[] getDiagonal(int[][] matrix, int x, int y, char direction) {
         var diagonal = new ArrayList<Integer>();
@@ -60,7 +60,6 @@ public class Projekt {
 
     /***
      * Generates a 5x5 matrix with random values ( 10 <= number <= 99)
-     * Made by: Nagy Richárd
      */
     public static int[][] generateMatrix() {
         var random = new Random();
@@ -102,6 +101,17 @@ public class Projekt {
                 return false;
         }
         return dividers==2;
+    }
+    public static ArrayList<Integer> matrixToList(int[][] matrix){
+        var list = new ArrayList<Integer>();
+
+        for (int[] arr : matrix){
+            for(int i : arr){
+                list.add(i);
+            }
+        }
+
+        return list;
     }
 
 }
