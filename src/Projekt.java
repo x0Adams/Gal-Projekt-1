@@ -38,6 +38,7 @@ public class Projekt {
      * @param y top y index of the diagonal
      * @param direction can be r (right) or l (left), it is the direction of the diagonal form the top to the bottom
      * @return an array of the elements of the diagonal
+     * Made by: Nagy Richárd
      */
     public static int[] getDiagonal(int[][] matrix, int x, int y, char direction) {
         var diagonal = new ArrayList<Integer>();
@@ -60,6 +61,7 @@ public class Projekt {
 
     /***
      * Generates a 5x5 matrix with random values ( 10 <= number <= 99)
+     * Made by: Nagy Richárd
      */
     public static int[][] generateMatrix() {
         var random = new Random();
