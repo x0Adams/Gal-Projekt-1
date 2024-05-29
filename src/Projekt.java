@@ -1,10 +1,11 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.Collectors;
+
 
 public class Projekt {
     public static void main(String[] args) {
-        int[][] matrix = generateMatrix();
+        var matrix = generateMatrix();
         System.out.println("Mátrix:");
         printMatrix(matrix);
         System.out.print("1. feladat\n\t");
@@ -18,18 +19,35 @@ public class Projekt {
      * Made by: Nagy Richárd
      */
     public static void task1(int[][] matrix) {
-        var diagonal = new ArrayList<Integer>();
+        System.out.print("a:\n\t\t");
         var matrixList = matrixToList(matrix);
-        int[] arr;
-        for (int x = 1; x < matrix.length; x++) {
+        findAllPrime(matrixList).forEach(num -> System.out.print(num + " "));
+
+        System.out.printf("\n\tb:\n\t\tsum: %d\n", sumUnderMainDiagonal(matrix));
+    }
+
+
+    public static ArrayList<Integer> findAllPrime(ArrayList<Integer> matrix) {
+        return (ArrayList<Integer>) matrix.stream().filter(num -> isPrime(num)).collect(Collectors.toList()); //finds all prime with
+    }
+
+    /**
+     * finds the sum under the main diagonal
+     *
+     * @param matrix
+     * @return (int) the sum of the numbers
+     * Made by: Nagy Richárd
+     */
+    public static int sumUnderMainDiagonal(int[][] matrix) {
+        var diagonal = new ArrayList<Integer>(); //all diagonal
+        int[] arr; //buffer for fiagonals to load diagonal into arraylist
+        for (int x = 1; x < matrix.length; x++) { //gets all diagonal under the main diagonal
             arr = getDiagonal(matrix, x, 0, 'r');
             for (int element : arr) {
-                diagonal.add(element);
+                diagonal.add(element); //writes the diagonal into the arraylist
             }
         }
-        System.out.print("a:\n\t\t");
-        matrixList.stream().filter(num -> isPrime(num)).forEach(num -> System.out.print(num + " "));
-        System.out.println("\n\tb:\n\t\t" + "sum: " + diagonal.stream().reduce(0, Integer::sum));
+        return diagonal.stream().reduce(0, Integer::sum); //the sum of the elements in the array with stream
     }
 
 
@@ -61,7 +79,6 @@ public class Projekt {
 
     /***
      * Generates a 5x5 matrix with random values ( 10 <= number <= 99)
-     * Made by: Nagy Richárd
      */
     public static int[][] generateMatrix() {
         var random = new Random();
@@ -105,8 +122,8 @@ public class Projekt {
     }
 
     /***
-     *converts matrixes into an ArrayList
-     *Made by: Nagy Richárd
+     * converts a matrix into a list for ease of use
+     * Made by: Nagy Richárd
      */
     public static ArrayList<Integer> matrixToList(int[][] matrix) {
         var list = new ArrayList<Integer>();
@@ -121,6 +138,10 @@ public class Projekt {
     }
 
     //task2
+
+    /***
+     * made by: Győri Ádám
+     */
     public static void task2(int[][] matrix) {
         System.out.println("2. feladat");
         System.out.println("\ta:");
@@ -134,6 +155,9 @@ public class Projekt {
         System.out.println("\t\tsum: "+task2b(matrix));
     }
 
+    /***
+     * made by: Győri Ádám
+     */
     public static float[] task2a(int[][] matrix) {
         float[] avgs = new float[matrix.length];
 
@@ -148,6 +172,9 @@ public class Projekt {
         return avgs;
     }
 
+    /***
+     * made by: Győri Ádám
+     */
     public static int task2b(int[][] matrix) {
         int sum = 0;
         int[] diagonal;
