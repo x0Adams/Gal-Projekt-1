@@ -10,6 +10,7 @@ public class Projekt {
         printMatrix(matrix);
         System.out.print("1. feladat\n\t");
         task1(matrix);
+        task2(matrix);
     }
 
     /***
@@ -136,4 +137,53 @@ public class Projekt {
         return list;
     }
 
+    //task2
+
+    /***
+     * made by: Győri Ádám
+     */
+    public static void task2(int[][] matrix) {
+        System.out.println("2. feladat");
+        System.out.println("\ta:");
+        float[] avgs = task2a(matrix);
+        System.out.print("\t\t");
+        for (float avg : avgs) {
+            System.out.print(avg + " ");
+        }
+        System.out.println();
+        System.out.println("\tb:");
+        System.out.println("\t\tsum: "+task2b(matrix));
+    }
+
+    /***
+     * made by: Győri Ádám
+     */
+    public static float[] task2a(int[][] matrix) {
+        float[] avgs = new float[matrix.length];
+
+        for (int i = 0; i < matrix.length; i++) {
+            float sum = 0;
+            for (int j = 0; j < matrix[i].length; j++) {
+                sum = sum + matrix[i][j];
+            }
+            avgs[i] = sum / matrix[i].length;
+        }
+
+        return avgs;
+    }
+
+    /***
+     * made by: Győri Ádám
+     */
+    public static int task2b(int[][] matrix) {
+        int sum = 0;
+        int[] diagonal;
+        for (int i = 1; i < matrix.length; i++) {
+            diagonal = getDiagonal(matrix, i, 4, 'l');
+            for (int k : diagonal) {
+                sum += k;
+            }
+        }
+        return sum;
+    }
 }
