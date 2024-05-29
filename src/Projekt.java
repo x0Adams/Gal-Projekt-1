@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.stream.Collectors;
+
 
 public class Projekt {
     public static void main(String[] args) {
@@ -16,20 +18,35 @@ public class Projekt {
      * Made by: Nagy Richárd
      */
     public static void task1(int[][] matrix) {
-        var diagonal = new ArrayList<Integer>();
-        var matrixList = matrixToList(matrix);
-        int[] arr;
-        for (int x = 1; x < matrix.length; x++) {
-            arr = getDiagonal(matrix, x, 0, 'r');
-            for (int element : arr) {
-                diagonal.add(element);
-            }
-        }
         System.out.print("a:\n\t\t");
-        matrixList.stream().filter( num -> isPrime(num)).forEach(num -> System.out.print(num+" "));
-        System.out.println("\n\tb:\n\t\t"+"sum: "+diagonal.stream().reduce(0, Integer::sum));
+        var matrixList = matrixToList(matrix);
+        findAllPrime(matrixList).forEach(num -> System.out.print(num+" "));
+
+        System.out.printf("\n\tb:\n\t\tsum: %d\n",sumUnderMainDiagonal(matrix));
     }
 
+
+    public static ArrayList<Integer> findAllPrime(ArrayList<Integer> matrix){
+        return (ArrayList<Integer>) matrix.stream().filter(num -> isPrime(num)).collect(Collectors.toList()); //finds all prime with
+    }
+
+    /**
+     * finds the sum under the main diagonal
+     * @param matrix
+     * @return (int) the sum of the numbers
+     * Made by: Nagy Richárd
+     */
+    public static int sumUnderMainDiagonal(int[][] matrix){
+        var diagonal = new ArrayList<Integer>(); //all diagonal
+        int[] arr; //buffer for fiagonals to load diagonal into arraylist
+        for (int x = 1; x < matrix.length; x++) { //gets all diagonal under the main diagonal
+            arr = getDiagonal(matrix, x, 0, 'r');
+            for (int element : arr) {
+                diagonal.add(element); //writes the diagonal into the arraylist
+            }
+        }
+        return diagonal.stream().reduce(0, Integer::sum ); //the sum of the elements in the array with stream
+    }
 
 
 
@@ -61,7 +78,6 @@ public class Projekt {
 
     /***
      * Generates a 5x5 matrix with random values ( 10 <= number <= 99)
-     * Made by: Nagy Richárd
      */
     public static int[][] generateMatrix() {
         var random = new Random();
@@ -75,7 +91,6 @@ public class Projekt {
     }
 
     /***
-     * only for debug reasons
      * @param matrix a matrix to print
      * Made by: Nagy Richárd
      */
@@ -104,10 +119,11 @@ public class Projekt {
         }
         return dividers==2;
     }
+
     /***
-    *converts matrixes into an ArrayList
-    *Made by: Nagy Richárd
-    */
+     * converts a matrix into a list for ease of use
+     * Made by: Nagy Richárd
+     */
     public static ArrayList<Integer> matrixToList(int[][] matrix){
         var list = new ArrayList<Integer>();
 
