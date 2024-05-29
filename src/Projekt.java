@@ -27,7 +27,7 @@ public class Projekt {
 
 
     public static ArrayList<Integer> findAllPrime(ArrayList<Integer> matrix){
-        return (ArrayList<Integer>) matrix.stream().filter(num -> isPrime(num)).collect(Collectors.toList()); //finds all prime with
+        return (ArrayList<Integer>) matrix.stream().filter(num -> isPrime(num)).collect(Collectors.toList()); //finds all prime with stream
     }
 
     /**
