@@ -1,4 +1,4 @@
-# Mi a rák legyen a neve
+# Gál Projekt 1
 
 notkulonme: nem volt kedvem szaporítani a szót :c
 
