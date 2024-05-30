@@ -72,4 +72,23 @@ class ProjektTest {
     void findAllPrime_Test_With_testMatrix() {
         assertEquals(new ArrayList<Integer>(List.of(2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5)), Projekt.findAllPrime(Projekt.matrixToList(testMatrix)));
     }
+
+    //there is a bug in this genius framework, so I have to convert it into ArrayList <3
+    @Test
+    void task2a_Test() {
+        ArrayList<Float> reference = new ArrayList<>(List.<Float>of(1F, 2F, 3F, 4F, 5F));
+        ArrayList<Float> expected = new ArrayList<>();
+        float[] expectedArr = Projekt.task2a(testMatrix);
+        for (float x : expectedArr) {
+            expected.add(x);
+        }
+
+        assertEquals(reference, expected);
+    }
+
+    @Test
+    void task2b_Test() {
+        int expexcted = 2 + 3 + 4 + 5 + 3 + 4 + 5 + 4 + 5 + 5;
+        assertEquals(expexcted, Projekt.task2b(testMatrix));
+    }
 }
