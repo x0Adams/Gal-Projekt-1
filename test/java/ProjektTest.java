@@ -76,19 +76,22 @@ class ProjektTest {
     //there is a bug in this genius framework, so I have to convert it into ArrayList <3
     @Test
     void task2a_Test() {
-        ArrayList<Float> reference = new ArrayList<>(List.<Float>of(1F, 2F, 3F, 4F, 5F));
-        ArrayList<Float> expected = new ArrayList<>();
-        float[] expectedArr = Projekt.task2a(testMatrix);
-        for (float x : expectedArr) {
-            expected.add(x);
-        }
-
-        assertEquals(reference, expected);
+        assertArrayEquals(new float[]{1F, 2F, 3F, 4F, 5F}, Projekt.task2a(testMatrix));
     }
 
     @Test
     void task2b_Test() {
         int expexcted = 2 + 3 + 4 + 5 + 3 + 4 + 5 + 4 + 5 + 5;
         assertEquals(expexcted, Projekt.task2b(testMatrix));
+    }
+    @Test
+    void getLargestFromColumns_Test(){
+        int[] expected = {5,5,5,5,5};
+        assertArrayEquals(expected, Projekt.getLargestFromColumns(testMatrix));
+    }
+
+    @Test
+    void sum_Test(){
+        assertEquals(5, Projekt.sum(testMatrix[0]));
     }
 }
