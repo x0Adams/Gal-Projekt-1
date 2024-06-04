@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,7 @@ public class Projekt {
         System.out.print("1. feladat\n\t");
         task1(matrix);
         task2(matrix);
+        task3(matrix);
     }
 
     /***
@@ -183,6 +185,48 @@ public class Projekt {
             for (int k : diagonal) {
                 sum += k;
             }
+        }
+        return sum;
+    }
+
+    /***
+     * made by: Pálocska Patrik
+     * @param matrix
+     */
+    public static void task3(int[][] matrix){
+        var taskA = getLargestFromColumns(matrix);
+        var mainDiagonal = getDiagonal(matrix, 0,0, 'r');
+        var sideDiagonal = getDiagonal(matrix, 0, matrix[0].length-1, 'l');
+        System.out.printf("3.feladat%n\ta:%n\t\t%s%n\tb:%n\t\t%d, %d",Arrays.toString(taskA).substring(1, Arrays.toString(taskA).length()-1), sum(mainDiagonal), sum(sideDiagonal));
+    }
+
+    /***
+     * made by: Pálocska Patrik
+     */
+    public static int[] getLargestFromColumns(int[][] matrix){
+        var allLargest = new int[matrix[0].length];
+        for (int i = 0; i < matrix[0].length; i++){
+            int largest = Integer.MIN_VALUE;
+            for (int j = 0; j < matrix.length; j++){
+                if (matrix[j][i] > largest)
+                    largest = matrix[j][i];
+            }
+            allLargest[i] = largest;
+        }
+        return allLargest;
+    }
+    /***
+     * made by: Pálocska Patrik
+     */
+    public static int sum(int[] arr){
+        int sum = 0;
+        for (int i : arr){
+            sum += i;
+        }
+        return sum;
+    }
+
+}
         }
         return sum;
     }
