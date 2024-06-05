@@ -227,7 +227,3 @@ public class Projekt {
     }
 
 }
-        }
-        return sum;
-    }
-}
